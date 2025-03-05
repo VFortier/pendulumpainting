@@ -33,6 +33,9 @@ function initSettings() {
   var rotationSpeed = 100;
   var rotationReductFactor = 100;
   var radiusReductSpeed = 100;
+  var swingingLength = 100;
+  var swingingSpeed = 0;
+  var startAngle = 0;
 
   pendulumSettings = new PaintPendulumSettings(
     xRadius,
@@ -43,7 +46,10 @@ function initSettings() {
     strokeColor,
     rotationSpeed,
     rotationReductFactor,
-    radiusReductSpeed
+    radiusReductSpeed,
+    swingingLength,
+    swingingSpeed,
+    startAngle
   );
 
   var backgroundColor = "000000";

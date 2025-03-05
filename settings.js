@@ -13,7 +13,10 @@ function PaintPendulumSettings(
     strokeColor,
     rotationSpeed,
     rotationReductFactor,
-    radiusReductSpeed) {
+    radiusReductSpeed,
+    swingingLength,
+    swingingSpeed,
+    startAngle) {
 
     this.xRadius = xRadius;
     this.yRadius = yRadius;
@@ -24,9 +27,11 @@ function PaintPendulumSettings(
     this.rotationSpeed = rotationSpeed;
     this.rotationReductFactor = rotationReductFactor;
     this.radiusReductSpeed = radiusReductSpeed;
-    this.swingingLength = 100;
+    this.swingingLength = swingingLength;
+    this.swingingSpeed = swingingSpeed;
+    this.startAngle = startAngle;
 
-    this.pointsPerFrame = 2;
+    this.pointsPerFrame = 15;
 
     this.getXRadius = function () {
         return this.xRadius;
@@ -70,6 +75,14 @@ function PaintPendulumSettings(
 
     this.getSwingingLength = function () {
         return this.swingingLength;
+    }
+
+    this.getSwingingSpeed = function () {
+        return this.swingingSpeed * 0.0004 / this.pointsPerFrame;
+    }
+
+    this.getStartAngle = function () {
+        return radians(this.startAngle);
     }
 
     this.getPointsPerFrame = function () {

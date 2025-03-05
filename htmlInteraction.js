@@ -60,6 +60,22 @@ function bindInputChanged(settings) {
     backgroundColorElem.input(function () {
         settings.bg.backgroundColor = this.value();
     });
+
+    let swingingLengthElem = select("#swingingLength");
+    swingingLengthElem.input(function () {
+        settings.pendulum.swingingLength = this.value();
+    });
+
+    let swingingSpeedElem = select("#swingingSpeed");
+    swingingSpeedElem.input(function () {
+        settings.pendulum.swingingSpeed = this.value();
+
+    });
+
+    let startAngleElem = select("#startAngle");
+    startAngleElem.input(function () {
+        settings.pendulum.startAngle = this.value();
+    });
 }
 
 function bindSettingsToHTML(settings) {
@@ -92,4 +108,13 @@ function bindSettingsToHTML(settings) {
 
     let backgroundColorElem = select("#bgColor");
     backgroundColorElem.value(settings.bg.backgroundColor);
+
+    let swingingLengthElem = select("#swingingLength");
+    swingingLengthElem.value(settings.pendulum.swingingLength);
+
+    let swingingSpeedElem = select("#swingingSpeed");
+    swingingSpeedElem.value(settings.pendulum.swingingSpeed);
+
+    let startAngleElem = select("#startAngle");
+    startAngleElem.value(settings.pendulum.startAngle);
 }
