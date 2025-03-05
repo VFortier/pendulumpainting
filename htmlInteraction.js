@@ -22,13 +22,13 @@ function bindInputChanged(settings) {
     let xRadiusElem = select("#xRadius");
     xRadiusElem.input(function () {
         settings.pendulum.xRadius = this.value();
-        paintPendulum.xRadius = settings.pendulum.getXRadius();
+        paintPendulum.xRadius = settings.pendulum.getInitXRadius();
     });
 
     let yRadiusElem = select("#yRadius");
     yRadiusElem.input(function () {
         settings.pendulum.yRadius = this.value();
-        paintPendulum.yRadius = settings.pendulum.getYRadius();
+        paintPendulum.yRadius = settings.pendulum.getInitYRadius();
     });
 
     let radiusReductSpeedElem = select("#radiusReductSpeed");

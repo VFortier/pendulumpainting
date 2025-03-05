@@ -11,7 +11,7 @@ function setup() {
   paintPendulum = new PaintPendulum(settings.pendulum);
   paintPendulum.init();
 
-  paintBackground(settings);
+  paintBackground(settings.bg);
   bindHTMLEvents(settings);
   bindSettingsToHTML(settings);
 }
@@ -24,11 +24,11 @@ function initSettings() {
   var globalSpeed = 100;
 
   // White
-  // var strokeColor = color(255);
+  var strokeColor = color(255);
   // Gold
   // var strokeColor = color(255, 215, 40);
   // Red
-  var strokeColor = "ac1428";
+  //var strokeColor = "ac1428";
 
   var rotationSpeed = 100;
   var rotationReductFactor = 100;
@@ -53,7 +53,18 @@ function initSettings() {
   );
 
   var backgroundColor = "000000";
-  var bgSettings = new BackgroundSettings(backgroundColor);
+  var backgroundHighlights = "330000";
+  var backgroundHighlightsThreshold = 300;
+  var backgroundHighlightsDetail = 500;
+  var highlightStretch = 10;
+
+  var bgSettings = new BackgroundSettings(
+    backgroundColor,
+    backgroundHighlights,
+    backgroundHighlightsThreshold,
+    backgroundHighlightsDetail,
+    highlightStretch
+  );
 
   return new GlobalSettings(pendulumSettings, bgSettings);
 }
@@ -84,12 +95,9 @@ function keyPressed() {
   }
 }
 
-function paintBackground() {
-  background(settings.bg.getBackgroundColor());
-}
 
 function resetBtnPressed() {
-  paintBackground();
+  paintBackground(settings.bg);
   paintPendulum.init();
   isRunning = true;
 }

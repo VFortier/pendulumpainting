@@ -33,11 +33,11 @@ function PaintPendulumSettings(
 
     this.pointsPerFrame = 15;
 
-    this.getXRadius = function () {
+    this.getInitXRadius = function () {
         return this.xRadius;
     }
 
-    this.getYRadius = function () {
+    this.getInitYRadius = function () {
         return this.yRadius;
     }
 
@@ -70,7 +70,7 @@ function PaintPendulumSettings(
     }
 
     this.getRadiusReductSpeed = function () {
-        return (this.radiusReductSpeed * 0.00019) / this.pointsPerFrame;
+        return this.radiusReductSpeed * 0.0002 / this.pointsPerFrame;
     }
 
     this.getSwingingLength = function () {
@@ -90,10 +90,35 @@ function PaintPendulumSettings(
     }
 }
 
-function BackgroundSettings(backgroundColor) {
-    this.backgroundColor = backgroundColor;
+function BackgroundSettings(
+    bgColor,
+    highlightsColor,
+    highlightsThreshold,
+    highlightsDetail,
+    highlightsStretch) {
+    this.bgColor = bgColor;
+    this.highlightsColor = highlightsColor;
+    this.highlightsThreshold = highlightsThreshold;
+    this.highlightsDetail = highlightsDetail;
+    this.highlightsStretch = highlightsStretch;
 
-    this.getBackgroundColor = function () {
-        return color("#" + this.backgroundColor);
+    this.getColor = function () {
+        return color("#" + this.bgColor);
+    }
+
+    this.getHighlightsColor = function () {
+        return color("#" + this.highlightsColor);
+    }
+
+    this.getHighlightsThreshold = function () {
+        return this.highlightsThreshold / 50;
+    }
+
+    this.getHighlightsDetail = function () {
+        return this.highlightsDetail * 0.00005;
+    }
+
+    this.getHighlightsStretch = function () {
+        return this.highlightsStretch / 100;
     }
 }

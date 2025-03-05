@@ -4,11 +4,11 @@ function PaintPendulum(settings) {
     this.init = function () {
         this.angleSpeed = PI * 0.01 / this.settings.getPointsPerFrame();
         this.angle = this.settings.getStartAngle();
-        this.xRadius = this.settings.getXRadius();
-        this.yRadius = this.settings.getYRadius();
+        this.xRadius = this.settings.getInitXRadius();
+        this.yRadius = this.settings.getInitYRadius();
         this.x = this.xRadius * cos(this.angle);
         this.y = this.yRadius * sin(this.angle);
-        this.xToY = this.settings.getXRadius() / this.settings.getYRadius();
+        this.xToY = this.settings.getInitXRadius() / this.settings.getInitYRadius();
         this.rotationSpeed = this.settings.getRotationSpeed();
         this.rotation = 0;
         this.swinging = 0;
@@ -45,10 +45,15 @@ function PaintPendulum(settings) {
 
             // Keep ellipse proportions
             //this.xRadius = this.xRadius > 0 ? this.xRadius - this.settings.getRadiusReductSpeed() * this.xToY : 0;
-            //this.yRadius = this.yRadius > 0 ? this.yRadius - this.settings.getRadiusReductSpeed() : 0;
+            // this.yRadius = this.yRadius > 0 ? this.yRadius - this.settings.getRadiusReductSpeed() : 0;
 
-            // Reduce equally
-            this.xRadius = this.xRadius > 0 ? this.xRadius - this.settings.getRadiusReductSpeed() : 0;
+            // Reduce equally 
+            // this.xRadius = this.xRadius > 0 ? this.xRadius - this.settings.getRadiusReductSpeed() : 0;
+            // this.yRadius = this.yRadius > 0 ? this.yRadius - this.settings.getRadiusReductSpeed() : 0;
+
+            // In between
+            let factor = this.xToY > 1 ? this.xToY / 1.3 : this.xToY * 1.;
+            this.xRadius = this.xRadius > 0 ? this.xRadius - this.settings.getRadiusReductSpeed() * factor : 0;
             this.yRadius = this.yRadius > 0 ? this.yRadius - this.settings.getRadiusReductSpeed() : 0;
         }
     }
