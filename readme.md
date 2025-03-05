@@ -1,15 +1,15 @@
 # Ideas
 
-- Change color mode to HSL
-- "Init" with button + bind to "r"
+- Canvas swinging in pendulum
+- Radius Reduct Speed : make it relative instead of absolute
 - Background
 -- Perlin noise "cloudy"
 -- Perlin flowfield using short lived particle to draw strikes of paint (try color very close to plain background underneat)
-- Canvas swinging in pendulum
 - Create other drawing modes
 -- With vertex
 -- With splashes
 -- With line with darked center
+- Start new pendulum button (to draw many on one frame)
 - Gallery : Option to draw on one or many "frame"
 -- Shadow around canvas to show elevation
 -- Paint only appears on frame

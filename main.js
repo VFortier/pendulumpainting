@@ -7,13 +7,16 @@ function setup() {
   let canvas = createCanvas(800, 800);
   canvas.parent("canvasContainer");
 
-  initPendulum();
-  paintBackground();
+  settings = initSettings();
+  paintPendulum = new PaintPendulum(settings.pendulum);
+  paintPendulum.init();
+
+  paintBackground(settings);
   bindHTMLEvents(settings);
-  bindSettingsToHTML(paintPendulum.settings);
+  bindSettingsToHTML(settings);
 }
 
-function initPendulum() {
+function initSettings() {
   var xRadius = 400;
   var yRadius = 200;
   var centerX = width / 2;
@@ -31,7 +34,7 @@ function initPendulum() {
   var rotationReductFactor = 100;
   var radiusReductSpeed = 100;
 
-  settings = new PaintPendulumSettings(
+  pendulumSettings = new PaintPendulumSettings(
     xRadius,
     yRadius,
     centerX,
@@ -43,8 +46,10 @@ function initPendulum() {
     radiusReductSpeed
   );
 
-  paintPendulum = new PaintPendulum(settings);
-  paintPendulum.init();
+  var backgroundColor = "000000";
+  var bgSettings = new BackgroundSettings(backgroundColor);
+
+  return new GlobalSettings(pendulumSettings, bgSettings);
 }
 
 function draw() {
@@ -62,13 +67,19 @@ function keyPressed() {
   if (keyCode == 32) {
     isRunning = !isRunning;
   }
+
+  // r
+  if (keyCode == 82) {
+    resetBtnPressed();
+  }
+
+  if (keyCode == UP_ARROW) {
+    paintPendulum.moveAndPaintOnce();
+  }
 }
 
 function paintBackground() {
-  // Black
-  background(0, 0, 0);
-  // Dark blue
-  // background(17, 17, 110);
+  background(settings.bg.getBackgroundColor());
 }
 
 function resetBtnPressed() {

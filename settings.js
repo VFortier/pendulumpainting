@@ -1,3 +1,9 @@
+function GlobalSettings(pendulumSettings, bgSettings) {
+    this.pendulum = pendulumSettings;
+    this.bg = bgSettings;
+}
+
+
 function PaintPendulumSettings(
     xRadius,
     yRadius,
@@ -18,6 +24,7 @@ function PaintPendulumSettings(
     this.rotationSpeed = rotationSpeed;
     this.rotationReductFactor = rotationReductFactor;
     this.radiusReductSpeed = radiusReductSpeed;
+    this.swingingLength = 100;
 
     this.pointsPerFrame = 2;
 
@@ -61,9 +68,19 @@ function PaintPendulumSettings(
         return (this.radiusReductSpeed * 0.00019) / this.pointsPerFrame;
     }
 
+    this.getSwingingLength = function () {
+        return this.swingingLength;
+    }
+
     this.getPointsPerFrame = function () {
         return this.pointsPerFrame;
     }
+}
 
+function BackgroundSettings(backgroundColor) {
+    this.backgroundColor = backgroundColor;
 
+    this.getBackgroundColor = function () {
+        return color("#" + this.backgroundColor);
+    }
 }
