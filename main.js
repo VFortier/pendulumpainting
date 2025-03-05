@@ -11,12 +11,11 @@ function setup() {
     print("meow");
   });
 
-  var xRadius = 1000;
-  var yRadius = 500;
-  var pointsPerFrame = 2;
-  var centerX = 0; width / 2;
+  var xRadius = 400;
+  var yRadius = 200;
+  var centerX = width / 2;
   var centerY = height / 2;
-  var globalSpeed = 100;
+  var globalSpeed = 10;
 
   // White
   var strokeColor = color(255);
@@ -25,7 +24,23 @@ function setup() {
   // Red
   var strokeColor = color(175, 20, 40);
 
-  paintPendulum = new PaintPendulum(xRadius, yRadius, pointsPerFrame, centerX, centerY, globalSpeed, strokeColor);
+  var rotationSpeed = PI * 0.0005;
+  var rotationReductFactor = 0.000123;
+  var radiusReductSpeed = 0.019;
+
+  let settings = new PaintPendulumSettings(
+    xRadius,
+    yRadius,
+    centerX,
+    centerY,
+    globalSpeed,
+    strokeColor,
+    rotationSpeed,
+    rotationReductFactor,
+    radiusReductSpeed
+  );
+
+  paintPendulum = new PaintPendulum(settings);
 
   // Black
   background(0, 0, 0);
@@ -44,7 +59,7 @@ function draw() {
   }
 
   var rotationSpeedElem = select("#rotationSpeed");
-  print(rotationSpeedElem.value());
+  // print(rotationSpeedElem.value());
 }
 
 function keyPressed() {
