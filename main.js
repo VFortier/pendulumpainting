@@ -24,12 +24,13 @@ function initSettings() {
   var globalSpeed = 100;
 
   // White
-  var strokeColor = color(255);
+  var strokeColor = "FFFFFF"
   // Gold
   // var strokeColor = color(255, 215, 40);
   // Red
   //var strokeColor = "ac1428";
 
+  var strokeWeight = 2;
   var rotationSpeed = 100;
   var rotationReductFactor = 100;
   var radiusReductSpeed = 100;
@@ -44,6 +45,7 @@ function initSettings() {
     centerY,
     globalSpeed,
     strokeColor,
+    strokeWeight,
     rotationSpeed,
     rotationReductFactor,
     radiusReductSpeed,
@@ -52,9 +54,9 @@ function initSettings() {
     startAngle
   );
 
-  var backgroundColor = "000000";
-  var backgroundHighlights = "330000";
-  var backgroundHighlightsThreshold = 300;
+  var backgroundColor = "030333";
+  var backgroundHighlights = "060699";
+  var backgroundHighlightsThreshold = 100;
   var backgroundHighlightsDetail = 500;
   var highlightStretch = 10;
 
@@ -94,6 +96,13 @@ function keyPressed() {
     paintPendulum.moveAndPaintOnce();
   }
 }
+
+// disable scrolling down with spacebar
+window.addEventListener('keydown', function (e) {
+  if (e.keyCode == 32 && e.target == document.body) {
+    e.preventDefault();
+  }
+});
 
 
 function resetBtnPressed() {

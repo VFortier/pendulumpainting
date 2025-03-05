@@ -56,9 +56,9 @@ function bindInputChanged(settings) {
         settings.pendulum.strokeColor = this.value();
     });
 
-    let backgroundColorElem = select("#bgColor");
-    backgroundColorElem.input(function () {
-        settings.bg.backgroundColor = this.value();
+    let strokeWeightElem = select("#strokeWeight");
+    strokeWeightElem.input(function () {
+        settings.pendulum.strokeWeight = this.value();
     });
 
     let swingingLengthElem = select("#swingingLength");
@@ -76,6 +76,32 @@ function bindInputChanged(settings) {
     startAngleElem.input(function () {
         settings.pendulum.startAngle = this.value();
     });
+
+    let backgroundColorElem = select("#bgColor");
+    backgroundColorElem.input(function () {
+        settings.bg.bgColor = this.value();
+    });
+
+    let backgroundHighlightsElem = select("#highlightsColor");
+    backgroundHighlightsElem.input(function () {
+        settings.bg.highlightsColor = this.value();
+    });
+
+    let backgroundHighlightsThresholdElem = select("#highlightsThreshold");
+    backgroundHighlightsThresholdElem.input(function () {
+        settings.bg.highlightsThreshold = this.value();
+    });
+
+    let backgroundHighlightsDetailElem = select("#highlightsDetail");
+    backgroundHighlightsDetailElem.input(function () {
+        settings.bg.highlightsDetail = this.value();
+    });
+
+    let highlightStretchElem = select("#highlightsStretch");
+    highlightStretchElem.input(function () {
+        settings.bg.highlightsStretch = this.value();
+    });
+
 }
 
 function bindSettingsToHTML(settings) {
@@ -106,8 +132,8 @@ function bindSettingsToHTML(settings) {
     let strokeColorElem = select("#strokeColor");
     strokeColorElem.value(settings.pendulum.strokeColor);
 
-    let backgroundColorElem = select("#bgColor");
-    backgroundColorElem.value(settings.bg.backgroundColor);
+    let strokeWeightElem = select("#strokeWeight");
+    strokeWeightElem.value(settings.pendulum.strokeWeight);
 
     let swingingLengthElem = select("#swingingLength");
     swingingLengthElem.value(settings.pendulum.swingingLength);
@@ -117,4 +143,19 @@ function bindSettingsToHTML(settings) {
 
     let startAngleElem = select("#startAngle");
     startAngleElem.value(settings.pendulum.startAngle);
+
+    let backgroundColorElem = select("#bgColor");
+    backgroundColorElem.value(settings.bg.bgColor);
+
+    let backgroundHighlightsElem = select("#highlightsColor");
+    backgroundHighlightsElem.value(settings.bg.highlightsColor);
+
+    let backgroundHighlightsThresholdElem = select("#highlightsThreshold");
+    backgroundHighlightsThresholdElem.value(settings.bg.highlightsThreshold);
+
+    let backgroundHighlightsDetailElem = select("#highlightsDetail");
+    backgroundHighlightsDetailElem.value(settings.bg.highlightsDetail);
+
+    let highlightStretchElem = select("#highlightsStretch");
+    highlightStretchElem.value(settings.bg.highlightsStretch);
 }

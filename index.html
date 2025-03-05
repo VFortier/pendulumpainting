@@ -22,6 +22,9 @@
     <div id="canvasContainer" class="p-3"></div>
     <div id="settingsPanel">
       <div class="form-group p-3 container">
+        <div class="row text-center">
+          <h4>Pendulum Settings</h2>
+        </div>
         <div class="row">
           <div class="col-6 pt-1">
             <label class="text-nowrap" for="rotationSpeed">Rotation Speed</label>
@@ -117,11 +120,11 @@
         </div>
         <div class="row">
           <div class="col-6 pt-1">
-            <label class="text-nowrap" for="bgColor">Background Color</label>
+            <label class="text-nowrap" for="strokeWeight">Stroke Weight</label>
           </div>
           <div class="col-6">
             <input class="form-label
-            form-control" type="text" id="bgColor" name="bgColor">
+            form-control" type="number" id="strokeWeight" name="strokeWeight" min="1" max="50" step="1">
           </div>
         </div>
         <div class="row">
@@ -140,6 +143,58 @@
           <div class="col-6">
             <input class="form-label
             form-control" type="number" id="swingingLength" name="swingingLength" min="0" max="1000000" step="50">
+          </div>
+        </div>
+
+        <hr>
+        <div class="row text-center">
+          <h4>Background Settings</h2>
+        </div>
+        <div class="row">
+          <div class="col-6 pt-1">
+            <label class="text-nowrap" for="bgColor">Background Color</label>
+          </div>
+          <div class="col-6">
+            <input class="form-label
+            form-control" type="text" id="bgColor" name="bgColor">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 pt-1">
+            <label class="text-nowrap" for="highlightsColor">Highlights Color</label>
+          </div>
+          <div class="col-6">
+            <input class="form-label
+            form-control" type="text" id="highlightsColor" name="highlightsColor">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 pt-1">
+            <label class="text-nowrap" for="highlightsThreshold">Highlights Threshold</label>
+          </div>
+          <div class="col-6">
+            <input class="form-label
+            form-control" type="number" id="highlightsThreshold" name="highlightsThreshold" min="0" max="1000000"
+              step="50">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 pt-1">
+            <label class="text-nowrap" for="highlightsDetail">Highlights Details</label>
+          </div>
+          <div class="col-6">
+            <input class="form-label
+            form-control" type="number" id="highlightsDetail" name="highlightsDetail" min="0" max="1000000" step="50">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 pt-1">
+            <label class="text-nowrap" for="highlightsStretch">Highlights Stretch</label>
+          </div>
+          <div class="col-6">
+            <input class="form-label
+            form-control" type="number" id="highlightsStretch" name="highlightsStretch" min="0" max="1000000"
+              step="50">
           </div>
         </div>
 

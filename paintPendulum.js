@@ -10,7 +10,7 @@ function PaintPendulum(settings) {
         this.y = this.yRadius * sin(this.angle);
         this.xToY = this.settings.getInitXRadius() / this.settings.getInitYRadius();
         this.rotationSpeed = this.settings.getRotationSpeed();
-        this.rotation = 0;
+        this.rotation = this.settings.getStartAngle();
         this.swinging = 0;
     }
 
@@ -44,30 +44,30 @@ function PaintPendulum(settings) {
 
 
             // Keep ellipse proportions
-            //this.xRadius = this.xRadius > 0 ? this.xRadius - this.settings.getRadiusReductSpeed() * this.xToY : 0;
-            // this.yRadius = this.yRadius > 0 ? this.yRadius - this.settings.getRadiusReductSpeed() : 0;
+            this.xRadius = this.xRadius > 0 ? this.xRadius - this.settings.getRadiusReductSpeed() * this.xToY : 0;
+            this.yRadius = this.yRadius > 0 ? this.yRadius - this.settings.getRadiusReductSpeed() : 0;
 
             // Reduce equally 
             // this.xRadius = this.xRadius > 0 ? this.xRadius - this.settings.getRadiusReductSpeed() : 0;
             // this.yRadius = this.yRadius > 0 ? this.yRadius - this.settings.getRadiusReductSpeed() : 0;
 
             // In between
-            let factor = this.xToY > 1 ? this.xToY / 1.3 : this.xToY * 1.;
-            this.xRadius = this.xRadius > 0 ? this.xRadius - this.settings.getRadiusReductSpeed() * factor : 0;
-            this.yRadius = this.yRadius > 0 ? this.yRadius - this.settings.getRadiusReductSpeed() : 0;
+            //let factor = this.xToY > 1 ? this.xToY / 1.3 : this.xToY * 1.;
+            //this.xRadius = this.xRadius > 0 ? this.xRadius - this.settings.getRadiusReductSpeed() * factor : 0;
+            //this.yRadius = this.yRadius > 0 ? this.yRadius - this.settings.getRadiusReductSpeed() : 0;
         }
     }
 
     this._dropPaintWithPoints = function () {
         stroke(this.settings.getStrokeColor());
-        strokeWeight(3);
+        strokeWeight(this.settings.getStrokeWeight());
         point(this.x, this.y);
     }
 
     this._dropPaintWithVertex = function () {
         let strokeColor = this.settings.getStrokeColor();
         stroke(strokeColor);
-        strokeWeight(2);
+        strokeWeight(this.settings.getStrokeWeight());
         noFill();
         line(this.x, this.y, this.prevX, this.prevY);
     }

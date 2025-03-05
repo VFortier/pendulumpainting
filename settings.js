@@ -11,6 +11,7 @@ function PaintPendulumSettings(
     centerY,
     globalSpeed,
     strokeColor,
+    strokeWeight,
     rotationSpeed,
     rotationReductFactor,
     radiusReductSpeed,
@@ -24,6 +25,7 @@ function PaintPendulumSettings(
     this.centerY = centerY;
     this.globalSpeed = globalSpeed;
     this.strokeColor = strokeColor;
+    this.strokeWeight = strokeWeight;
     this.rotationSpeed = rotationSpeed;
     this.rotationReductFactor = rotationReductFactor;
     this.radiusReductSpeed = radiusReductSpeed;
@@ -59,6 +61,10 @@ function PaintPendulumSettings(
 
     this.getStrokeColor = function () {
         return color("#" + this.strokeColor);
+    }
+
+    this.getStrokeWeight = function () {
+        return this.strokeWeight;
     }
 
     this.getRotationSpeed = function () {
