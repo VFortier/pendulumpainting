@@ -38,23 +38,27 @@ function PaintPendulumSettings(
     }
 
     this.getGlobalSpeed = function () {
-        return this.globalSpeed;
+        return this.globalSpeed / 50;
     }
 
-    this.getStrokeColor = function () {
+    this.getStrokeColorString = function () {
         return this.strokeColor;
     }
 
+    this.getStrokeColor = function () {
+        return color("#" + this.strokeColor);
+    }
+
     this.getRotationSpeed = function () {
-        return this.rotationSpeed / this.pointsPerFrame;
+        return this.rotationSpeed * PI * 0.000005 / this.pointsPerFrame;
     }
 
     this.getRotationReductFactor = function () {
-        return 1 - (this.rotationReductFactor / this.pointsPerFrame);
+        return 1 - ((this.rotationReductFactor * 0.00000123) / this.pointsPerFrame);
     }
 
     this.getRadiusReductSpeed = function () {
-        return this.radiusReductSpeed / this.pointsPerFrame;
+        return (this.radiusReductSpeed * 0.00019) / this.pointsPerFrame;
     }
 
     this.getPointsPerFrame = function () {

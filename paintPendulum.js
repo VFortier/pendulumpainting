@@ -1,18 +1,17 @@
 function PaintPendulum(settings) {
     this.settings = settings;
 
-    this.angleSpeed = PI * 0.01 / this.settings.getPointsPerFrame();
-
-    this.angle = 0;
-    this.x = this.xRadius * cos(this.angle);
-    this.y = this.yRadius * sin(this.angle);
-    this.xRadius = this.settings.getXRadius();
-    this.yRadius = this.settings.getYRadius();
-    this.xToY = this.settings.getXRadius() / this.settings.getYRadius();
-    this.rotationSpeed = this.settings.getRotationSpeed();
-    this.rotation = 0;
-    this.prevX;
-    this.prevY;
+    this.init = function () {
+        this.angleSpeed = PI * 0.01 / this.settings.getPointsPerFrame();
+        this.angle = 0;
+        this.xRadius = this.settings.getXRadius();
+        this.yRadius = this.settings.getYRadius();
+        this.x = this.xRadius * cos(this.angle);
+        this.y = this.yRadius * sin(this.angle);
+        this.xToY = this.settings.getXRadius() / this.settings.getYRadius();
+        this.rotationSpeed = this.settings.getRotationSpeed();
+        this.rotation = 0;
+    }
 
     this.moveAndPaint = function () {
         for (var i = 0; i < this.settings.getGlobalSpeed(); i++) {
@@ -49,7 +48,8 @@ function PaintPendulum(settings) {
     }
 
     this._dropPaintWithVertex = function () {
-        stroke(this.settings.getStrokeColor());
+        let strokeColor = this.settings.getStrokeColor();
+        stroke(strokeColor);
         strokeWeight(2);
         noFill();
         line(this.x, this.y, this.prevX, this.prevY);
