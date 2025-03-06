@@ -39,7 +39,7 @@ function PaintPendulum(settings) {
             this.swinging += this.settings.getSwingingSpeed();
             translate(0, swingValue);
 
-            this._dropPaintWithVertex();
+            this._dropPaintWithSplashes();
             pop();
 
 
@@ -62,13 +62,81 @@ function PaintPendulum(settings) {
         stroke(this.settings.getStrokeColor());
         strokeWeight(this.settings.getStrokeWeight());
         point(this.x, this.y);
+
+        // WIP - gradient stroke - not working because new points draw over previous ones
+        // var strokeStep = 0.5;
+        // var colorStep = 50 / this.settings.getStrokeWeight();
+        // var counter = 1;
+
+        // for (var i = this.settings.getStrokeWeight(); i > 0; i -= strokeStep) {
+        //     strokeWeight(i);
+        //     var myColor = this.settings.getStrokeColor();
+        //     var r = red(myColor) + colorStep * counter;
+        //     var g = green(myColor) + colorStep * counter;
+        //     var b = blue(myColor) + colorStep * counter;
+        //     var newColor = color(r, g, b);
+
+        //     stroke(newColor);
+        //     print(newColor);
+        //     point(this.x, this.y);
+        //     counter++;
+        // }
     }
 
     this._dropPaintWithVertex = function () {
         let strokeColor = this.settings.getStrokeColor();
         stroke(strokeColor);
+
         strokeWeight(this.settings.getStrokeWeight());
         noFill();
         line(this.x, this.y, this.prevX, this.prevY);
+    }
+
+    this._dropPaintWithSplashes = function () {
+        // Settings
+        // Moderate
+        let splashMaxDist = -1;
+        let splashChance = 0.05;
+        let splashMinWeight = 0.005;
+        let splashMaxWeight = 3;
+        let strokeReductionChance = 0.05;
+
+        // Very messy
+        /*let splashMaxDist = -1;
+        let splashChance = 0.15;
+        let splashMinWeight = 0.01;
+        let splashMaxWeight = 7;
+        let strokeReductionChance = 0.3;*/
+
+        // Draw normal line
+        let strokeColor = this.settings.getStrokeColor();
+        stroke(strokeColor);
+        if (random(0, 1) < strokeReductionChance) {
+            strokeWeight(this.settings.getStrokeWeight() - 1);
+        } else {
+            strokeWeight(this.settings.getStrokeWeight());
+        }
+
+        noFill();
+        line(this.x, this.y, this.prevX, this.prevY);
+
+        // Draw splash
+        if (random(0, 1) > splashChance) {
+            return;
+        }
+
+        let lineVect = createVector(this.x - this.prevX, this.y - this.prevY);
+        let lineVectPerp = createVector(lineVect.y, -lineVect.x);
+        // normalize
+        lineVectPerp.normalize();
+
+        let myStrokeWeight = this.settings.getStrokeWeight();
+        let splashDistWithWeight = splashMaxDist + myStrokeWeight;
+        var dist = random(-splashDistWithWeight, splashDistWithWeight);
+        lineVectPerp = lineVectPerp.mult(dist);
+
+        strokeWeight(random(splashMinWeight, splashMaxWeight));
+        point(this.x + lineVectPerp.x, this.y + lineVectPerp.y);
+
     }
 }

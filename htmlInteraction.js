@@ -10,95 +10,177 @@ function bindHTMLEvents(settings) {
 function bindInputChanged(settings) {
     let rotationSpeedElem = select("#rotationSpeed");
     rotationSpeedElem.input(function () {
+        if (this.value() === "") {
+            this.value(settings.pendulum.rotationSpeed);
+            return;
+        }
         settings.pendulum.rotationSpeed = this.value();
         paintPendulum.rotationSpeed = settings.pendulum.getRotationSpeed();
+
     });
 
     let rotationReductFactorElem = select("#rotationReductFactor");
     rotationReductFactorElem.input(function () {
+        if (this.value() === "") {
+            this.value(settings.pendulum.rotationReductFactor);
+            return;
+        }
         settings.pendulum.rotationReductFactor = this.value();
+
     });
 
     let xRadiusElem = select("#xRadius");
     xRadiusElem.input(function () {
+        if (this.value() === "") {
+            this.value(settings.pendulum.xRadius);
+            return;
+        }
         settings.pendulum.xRadius = this.value();
         paintPendulum.xRadius = settings.pendulum.getInitXRadius();
+
     });
 
     let yRadiusElem = select("#yRadius");
     yRadiusElem.input(function () {
+
+        if (this.value() === "") {
+            this.value(settings.pendulum.yRadius);
+            return;
+        }
         settings.pendulum.yRadius = this.value();
         paintPendulum.yRadius = settings.pendulum.getInitYRadius();
+
     });
 
     let radiusReductSpeedElem = select("#radiusReductSpeed");
     radiusReductSpeedElem.input(function () {
+        if (this.value() === "") {
+            this.value(settings.pendulum.radiusReductSpeed);
+            return;
+        }
+
         settings.pendulum.radiusReductSpeed = this.value();
     });
 
     let centerXElem = select("#centerX");
     centerXElem.input(function () {
+        if (this.value() === "") {
+            this.value(settings.pendulum.centerX);
+            return;
+        }
+
         settings.pendulum.centerX = this.value();
     });
 
     let centerYElem = select("#centerY");
     centerYElem.input(function () {
+        if (this.value() === "") {
+            this.value(settings.pendulum.centerY);
+            return;
+        }
+
         settings.pendulum.centerY = this.value();
     });
 
     let globalSpeedElem = select("#globalSpeed");
     globalSpeedElem.input(function () {
+        if (this.value() === "") {
+            this.value(settings.pendulum.globalSpeed);
+            return;
+        }
+
         settings.pendulum.globalSpeed = this.value();
     });
 
     let strokeColorElem = select("#strokeColor");
     strokeColorElem.input(function () {
-        settings.pendulum.strokeColor = this.value();
+        if (validateColor(this.value())) {
+            settings.pendulum.strokeColor = this.value();
+        }
     });
 
     let strokeWeightElem = select("#strokeWeight");
     strokeWeightElem.input(function () {
+        if (this.value() === "") {
+            this.value(settings.pendulum.strokeWeight);
+            return;
+        }
+
         settings.pendulum.strokeWeight = this.value();
     });
 
     let swingingLengthElem = select("#swingingLength");
     swingingLengthElem.input(function () {
+        if (this.value() === "") {
+            this.value(settings.pendulum.swingingLength);
+            return;
+        }
+
         settings.pendulum.swingingLength = this.value();
     });
 
     let swingingSpeedElem = select("#swingingSpeed");
     swingingSpeedElem.input(function () {
+        if (this.value() === "") {
+            this.value(settings.pendulum.swingingSpeed);
+            return;
+        }
+
         settings.pendulum.swingingSpeed = this.value();
 
     });
 
     let startAngleElem = select("#startAngle");
     startAngleElem.input(function () {
+        if (this.value() === "") {
+            this.value(settings.pendulum.startAngle);
+            return;
+        }
+
         settings.pendulum.startAngle = this.value();
     });
 
     let backgroundColorElem = select("#bgColor");
     backgroundColorElem.input(function () {
-        settings.bg.bgColor = this.value();
+        if (validateColor(this.value())) {
+            settings.bg.bgColor = this.value();
+        }
     });
 
     let backgroundHighlightsElem = select("#highlightsColor");
     backgroundHighlightsElem.input(function () {
-        settings.bg.highlightsColor = this.value();
+        if (validateColor(this.value())) {
+            settings.bg.highlightsColor = this.value();
+        }
     });
 
     let backgroundHighlightsThresholdElem = select("#highlightsThreshold");
     backgroundHighlightsThresholdElem.input(function () {
+        if (this.value() === "") {
+            this.value(settings.bg.highlightsThreshold);
+            return;
+        }
+
         settings.bg.highlightsThreshold = this.value();
     });
 
     let backgroundHighlightsDetailElem = select("#highlightsDetail");
     backgroundHighlightsDetailElem.input(function () {
+        if (this.value() === "") {
+            this.value(settings.bg.highlightsDetail);
+            return;
+        }
+
         settings.bg.highlightsDetail = this.value();
     });
 
     let highlightStretchElem = select("#highlightsStretch");
     highlightStretchElem.input(function () {
+        if (this.value() === "") {
+            this.value(settings.bg.highlightsStretch);
+            return;
+        }
+
         settings.bg.highlightsStretch = this.value();
     });
 
@@ -158,4 +240,14 @@ function bindSettingsToHTML(settings) {
 
     let highlightStretchElem = select("#highlightsStretch");
     highlightStretchElem.value(settings.bg.highlightsStretch);
+}
+
+function validateColor(colValue) {
+    var regex = /^[0-9A-Fa-f]{6}$/;
+
+    if (regex.test(colValue)) {
+        return true;
+    } else {
+        return false;
+    }
 }

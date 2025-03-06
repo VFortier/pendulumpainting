@@ -24,13 +24,13 @@ function initSettings() {
   var globalSpeed = 100;
 
   // White
-  var strokeColor = "FFFFFF"
+  var strokeColor = "FFFFFF";
   // Gold
   // var strokeColor = color(255, 215, 40);
   // Red
   //var strokeColor = "ac1428";
 
-  var strokeWeight = 2;
+  var strokeWeight = 3;
   var rotationSpeed = 100;
   var rotationReductFactor = 100;
   var radiusReductSpeed = 100;

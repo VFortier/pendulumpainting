@@ -7,7 +7,6 @@ function paintBackground(bgSettings) {
     loadPixels();
     noiseSeed(random() * 1000);
     noiseDetail();
-    print(bgSettings.getHighlightsStretch());
     for (var x = 0; x < width; x++) {
         for (var y = 0; y < height; y++) {
             var index = (x + (y * width)) * 4;
