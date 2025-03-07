@@ -39,7 +39,8 @@ function PaintPendulum(settings) {
             this.swinging += this.settings.getSwingingSpeed();
             translate(0, swingValue);
 
-            this._dropPaintWithSplashes();
+            //this._dropPaintWithSplashes();
+            this._dropPaintWithVertex();
             pop();
 
 
@@ -95,18 +96,31 @@ function PaintPendulum(settings) {
     this._dropPaintWithSplashes = function () {
         // Settings
         // Moderate
-        let splashMaxDist = -1;
-        let splashChance = 0.05;
-        let splashMinWeight = 0.005;
-        let splashMaxWeight = 3;
-        let strokeReductionChance = 0.05;
+        // let splashMaxDist = -1;
+        // let splashChance = 0.05;
+        // let splashMinWeight = 0.005;
+        // let splashMaxWeight = 3;
+        // let strokeReductionChance = 0.05;
+        // let splashLineMaxDist = 3;
+        // let lineChance = 0;
 
-        // Very messy
-        /*let splashMaxDist = -1;
+        // Messy
+        // let splashMaxDist = 5;
+        // let splashChance = 0.15;
+        // let splashMinWeight = 0.01;
+        // let splashMaxWeight = 7;
+        // let strokeReductionChance = 0.3;
+        // let splashLineMaxDist = 20;
+        // let lineChance = 0.2;
+
+        // Spike
+        let splashMaxDist = 5;
         let splashChance = 0.15;
         let splashMinWeight = 0.01;
         let splashMaxWeight = 7;
-        let strokeReductionChance = 0.3;*/
+        let strokeReductionChance = 0.3;
+        let splashLineMaxDist = 50;
+        let lineChance = 1;
 
         // Draw normal line
         let strokeColor = this.settings.getStrokeColor();
@@ -120,23 +134,52 @@ function PaintPendulum(settings) {
         noFill();
         line(this.x, this.y, this.prevX, this.prevY);
 
-        // Draw splash
+        // Draw splashes
         if (random(0, 1) > splashChance) {
             return;
         }
 
         let lineVect = createVector(this.x - this.prevX, this.y - this.prevY);
         let lineVectPerp = createVector(lineVect.y, -lineVect.x);
-        // normalize
         lineVectPerp.normalize();
 
-        let myStrokeWeight = this.settings.getStrokeWeight();
-        let splashDistWithWeight = splashMaxDist + myStrokeWeight;
-        var dist = random(-splashDistWithWeight, splashDistWithWeight);
-        lineVectPerp = lineVectPerp.mult(dist);
+        if (random(0, 1) > lineChance) {
+            // Draw splash with points
+            let myStrokeWeight = this.settings.getStrokeWeight();
+            let splashDistWithWeight = splashMaxDist + myStrokeWeight;
+            var dist = random(-splashDistWithWeight, splashDistWithWeight);
+            lineVectPerp = lineVectPerp.mult(dist);
 
-        strokeWeight(random(splashMinWeight, splashMaxWeight));
-        point(this.x + lineVectPerp.x, this.y + lineVectPerp.y);
+            strokeWeight(random(splashMinWeight, splashMaxWeight));
+            point(this.x + lineVectPerp.x, this.y + lineVectPerp.y);
+        } else {
+            // Draw splash with line
+            lineVectPerp = lineVectPerp.rotate(random(-PI, PI));
+
+            let myStrokeWeight = this.settings.getStrokeWeight();
+            let splashDistWithWeight = splashLineMaxDist + myStrokeWeight;
+            var dist = random(-splashDistWithWeight, splashDistWithWeight);
+
+            lineVectPerp = lineVectPerp.mult(dist);
+
+            let startWeight = 2;
+            let endWeight = 0.5;
+            let distStep = 0.025;
+
+            let numSteps = (startWeight - endWeight) / distStep;
+            let weigthStep = (startWeight - endWeight) / numSteps;
+            let displacementVectForStep = lineVectPerp.div(numSteps);
+            let curDisplacementVect = displacementVectForStep.copy();
+
+            let curWeight = startWeight;
+
+            for (var i = 0; i < numSteps; i++) {
+                strokeWeight(curWeight);
+                point(this.x + curDisplacementVect.x, this.y + curDisplacementVect.y);
+                curDisplacementVect = curDisplacementVect.add(displacementVectForStep);
+                curWeight -= weigthStep;
+            }
+        }
 
     }
 }
