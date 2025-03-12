@@ -39,7 +39,7 @@ function PaintPendulum(settings) {
             this.swinging += this.settings.getSwingingSpeed();
             translate(0, swingValue);
 
-            //this._dropPaintWithSplashes();
+            // this._dropPaintWithSplashes();
             this._dropPaintWithVertex();
             pop();
 
@@ -172,12 +172,14 @@ function PaintPendulum(settings) {
             let curDisplacementVect = displacementVectForStep.copy();
 
             let curWeight = startWeight;
+            //let rotation = random(-0.08, 0.08);
 
             for (var i = 0; i < numSteps; i++) {
                 strokeWeight(curWeight);
                 point(this.x + curDisplacementVect.x, this.y + curDisplacementVect.y);
                 curDisplacementVect = curDisplacementVect.add(displacementVectForStep);
                 curWeight -= weigthStep;
+                //curDisplacementVect = curDisplacementVect.rotate(rotation);
             }
         }
 

@@ -11,7 +11,6 @@ function bindInputChanged(settings) {
     let rotationSpeedElem = select("#rotationSpeed");
     rotationSpeedElem.input(function () {
         if (this.value() === "") {
-            this.value(settings.pendulum.rotationSpeed);
             return;
         }
         settings.pendulum.rotationSpeed = this.value();
@@ -22,7 +21,6 @@ function bindInputChanged(settings) {
     let rotationReductFactorElem = select("#rotationReductFactor");
     rotationReductFactorElem.input(function () {
         if (this.value() === "") {
-            this.value(settings.pendulum.rotationReductFactor);
             return;
         }
         settings.pendulum.rotationReductFactor = this.value();
@@ -32,7 +30,6 @@ function bindInputChanged(settings) {
     let xRadiusElem = select("#xRadius");
     xRadiusElem.input(function () {
         if (this.value() === "") {
-            this.value(settings.pendulum.xRadius);
             return;
         }
         settings.pendulum.xRadius = this.value();
@@ -44,7 +41,6 @@ function bindInputChanged(settings) {
     yRadiusElem.input(function () {
 
         if (this.value() === "") {
-            this.value(settings.pendulum.yRadius);
             return;
         }
         settings.pendulum.yRadius = this.value();
@@ -55,7 +51,6 @@ function bindInputChanged(settings) {
     let radiusReductSpeedElem = select("#radiusReductSpeed");
     radiusReductSpeedElem.input(function () {
         if (this.value() === "") {
-            this.value(settings.pendulum.radiusReductSpeed);
             return;
         }
 
@@ -65,7 +60,6 @@ function bindInputChanged(settings) {
     let centerXElem = select("#centerX");
     centerXElem.input(function () {
         if (this.value() === "") {
-            this.value(settings.pendulum.centerX);
             return;
         }
 
@@ -75,7 +69,6 @@ function bindInputChanged(settings) {
     let centerYElem = select("#centerY");
     centerYElem.input(function () {
         if (this.value() === "") {
-            this.value(settings.pendulum.centerY);
             return;
         }
 
@@ -85,7 +78,6 @@ function bindInputChanged(settings) {
     let globalSpeedElem = select("#globalSpeed");
     globalSpeedElem.input(function () {
         if (this.value() === "") {
-            this.value(settings.pendulum.globalSpeed);
             return;
         }
 
@@ -102,7 +94,6 @@ function bindInputChanged(settings) {
     let strokeWeightElem = select("#strokeWeight");
     strokeWeightElem.input(function () {
         if (this.value() === "") {
-            this.value(settings.pendulum.strokeWeight);
             return;
         }
 
@@ -112,7 +103,6 @@ function bindInputChanged(settings) {
     let swingingLengthElem = select("#swingingLength");
     swingingLengthElem.input(function () {
         if (this.value() === "") {
-            this.value(settings.pendulum.swingingLength);
             return;
         }
 
@@ -122,7 +112,6 @@ function bindInputChanged(settings) {
     let swingingSpeedElem = select("#swingingSpeed");
     swingingSpeedElem.input(function () {
         if (this.value() === "") {
-            this.value(settings.pendulum.swingingSpeed);
             return;
         }
 
@@ -133,7 +122,6 @@ function bindInputChanged(settings) {
     let startAngleElem = select("#startAngle");
     startAngleElem.input(function () {
         if (this.value() === "") {
-            this.value(settings.pendulum.startAngle);
             return;
         }
 
@@ -157,7 +145,6 @@ function bindInputChanged(settings) {
     let backgroundHighlightsThresholdElem = select("#highlightsThreshold");
     backgroundHighlightsThresholdElem.input(function () {
         if (this.value() === "") {
-            this.value(settings.bg.highlightsThreshold);
             return;
         }
 
@@ -167,7 +154,6 @@ function bindInputChanged(settings) {
     let backgroundHighlightsDetailElem = select("#highlightsDetail");
     backgroundHighlightsDetailElem.input(function () {
         if (this.value() === "") {
-            this.value(settings.bg.highlightsDetail);
             return;
         }
 
@@ -177,7 +163,6 @@ function bindInputChanged(settings) {
     let highlightStretchElem = select("#highlightsStretch");
     highlightStretchElem.input(function () {
         if (this.value() === "") {
-            this.value(settings.bg.highlightsStretch);
             return;
         }
 
