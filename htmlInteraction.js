@@ -1,3 +1,8 @@
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+    // Doesn't improve my offset problem where tooltip are way above button :(
+    // $('[data-toggle="tooltip"]').tooltip({ container: '#testid' });
+})
 
 
 function bindHTMLEvents(settings) {
