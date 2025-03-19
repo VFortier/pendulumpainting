@@ -2,9 +2,21 @@ var paintPendulum;
 var settings;
 var isRunning = true;
 
+// Square canvas
+// var CANVAS_WIDTH = 800;
+//var CANVAS_HEIGHT = 800;
+
+// 4 x 6 inch canvas
+var CANVAS_WIDTH = 1080;
+var CANVAS_HEIGHT = 720;
+
+// 5 x 7 inch canvas
+// var CANVAS_WIDTH = 1280;
+// var CANVAS_HEIGHT = 1080;
+
 function setup() {
   frameRate(60);
-  let canvas = createCanvas(800, 800);
+  let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
   canvas.parent("canvasContainer");
 
   settings = initSettings();
