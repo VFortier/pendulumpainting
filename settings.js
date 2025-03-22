@@ -30,29 +30,13 @@ function GlobalSettings(pendulumSettings, bgSettings) {
 
 
     this.fromJSON = function (json) {
-        this.pendulum = new PaintPendulumSettings(
-            json.pendulum.xRadius,
-            json.pendulum.yRadius,
-            json.pendulum.centerX,
-            json.pendulum.centerY,
-            json.pendulum.globalSpeed,
-            json.pendulum.strokeColor,
-            json.pendulum.strokeWeight,
-            json.pendulum.rotationSpeed,
-            json.pendulum.rotationReductFactor,
-            json.pendulum.radiusReductSpeed,
-            json.pendulum.swingingLength,
-            json.pendulum.swingingSpeed,
-            json.pendulum.startAngle
-        );
+        var pendulumSettings = new PaintPendulumSettings();
+        pendulumSettings.fromJSON(json.pendulum);
+        this.pendulum = pendulumSettings;
 
-        this.bg = new BackgroundSettings(
-            json.bg.bgColor,
-            json.bg.highlightsColor,
-            json.bg.highlightsThreshold,
-            json.bg.highlightsDetail,
-            json.bg.highlightsStretch
-        );
+        var bgSettings = new BackgroundSettings();
+        bgSettings.fromJSON(json.bg);
+        this.bg = bgSettings;
 
         return this;
     }
@@ -97,6 +81,7 @@ function PaintPendulumSettings(
     this.pointsPerFrame = 30;
 
     this.toJSON = toJSON;
+    this.fromJSON = fromJSON;
 
     this.getInitXRadius = function () {
         return this.xRadius;
@@ -172,6 +157,7 @@ function BackgroundSettings(
     this.highlightsStretch = highlightsStretch;
 
     this.toJSON = toJSON;
+    this.fromJSON = fromJSON;
 
     this.getColor = function () {
         return color("#" + this.bgColor);
@@ -203,6 +189,13 @@ function toJSON() {
         }
     }
     return json;
+}
+
+function fromJSON(json) {
+    for (var key in json) {
+        this[key] = json[key];
+    }
+    return this;
 }
 
 function settingsCookieExists() {
