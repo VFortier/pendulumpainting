@@ -7,6 +7,7 @@
 -- Shadow around canvas to show elevation
 -- Paint only appears on frame
 
+
 # UI
 - Trim spaces on inputs
 - Tooltips

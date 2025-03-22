@@ -1,6 +1,67 @@
 function GlobalSettings(pendulumSettings, bgSettings) {
     this.pendulum = pendulumSettings;
     this.bg = bgSettings;
+
+    this.toJSON = function () {
+        return {
+            pendulum: this.pendulum.toJSON(),
+            bg: this.bg.toJSON(),
+        };
+    }
+
+    this.loadFromCookie = function () {
+        var cookie = document.cookie;
+        var cookieArray = cookie.split(";");
+        var settingsString = "";
+        for (var i = 0; i < cookieArray.length; i++) {
+            if (cookieArray[i].includes("settings=")) {
+                settingsString = cookieArray[i].substring(9);
+                break;
+            }
+        }
+
+        // use fromJSON to create a new object
+        if (settingsString !== "") {
+            return this.fromJSON(JSON.parse(settingsString));
+        }
+
+        return null;
+    }
+
+
+    this.fromJSON = function (json) {
+        this.pendulum = new PaintPendulumSettings(
+            json.pendulum.xRadius,
+            json.pendulum.yRadius,
+            json.pendulum.centerX,
+            json.pendulum.centerY,
+            json.pendulum.globalSpeed,
+            json.pendulum.strokeColor,
+            json.pendulum.strokeWeight,
+            json.pendulum.rotationSpeed,
+            json.pendulum.rotationReductFactor,
+            json.pendulum.radiusReductSpeed,
+            json.pendulum.swingingLength,
+            json.pendulum.swingingSpeed,
+            json.pendulum.startAngle
+        );
+
+        this.bg = new BackgroundSettings(
+            json.bg.bgColor,
+            json.bg.highlightsColor,
+            json.bg.highlightsThreshold,
+            json.bg.highlightsDetail,
+            json.bg.highlightsStretch
+        );
+
+        return this;
+    }
+
+    this.saveAsCookie = function () {
+        var json = this.toJSON();
+        var jsonString = JSON.stringify(json);
+        document.cookie = "settings=" + jsonString;
+    }
 }
 
 
@@ -34,6 +95,8 @@ function PaintPendulumSettings(
     this.startAngle = startAngle;
 
     this.pointsPerFrame = 30;
+
+    this.toJSON = toJSON;
 
     this.getInitXRadius = function () {
         return this.xRadius;
@@ -108,6 +171,8 @@ function BackgroundSettings(
     this.highlightsDetail = highlightsDetail;
     this.highlightsStretch = highlightsStretch;
 
+    this.toJSON = toJSON;
+
     this.getColor = function () {
         return color("#" + this.bgColor);
     }
@@ -127,4 +192,20 @@ function BackgroundSettings(
     this.getHighlightsStretch = function () {
         return this.highlightsStretch / 100;
     }
+}
+
+function toJSON() {
+    // generate JSON object dynamically using only non-function, non-prototype properties
+    var json = {};
+    for (var key in this) {
+        if (this.hasOwnProperty(key) && typeof this[key] !== 'function') {
+            json[key] = this[key];
+        }
+    }
+    return json;
+}
+
+function settingsCookieExists() {
+    var cookie = document.cookie;
+    return cookie.includes("settings=");
 }

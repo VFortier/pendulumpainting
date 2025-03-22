@@ -12,8 +12,11 @@ function bindHTMLEvents(settings) {
     let resetPendulumBtn = select("#resetPendulumBtn");
     resetPendulumBtn.mousePressed(resetPendulumBtnPressed);
 
-    let saveAsImageBtn = select("#saveAsImage");
+    let saveAsImageBtn = select("#saveAsImageBtn");
     saveAsImageBtn.mousePressed(saveAsImageBtnPressed);
+
+    let defaultSettingsBtn = select("#defaultSettingsBtn");
+    defaultSettingsBtn.mousePressed(defaultSettingsBtnPressed);
 
     bindInputChanged(settings);
 }
@@ -26,6 +29,7 @@ function bindInputChanged(settings) {
         }
         settings.pendulum.rotationSpeed = this.value();
         paintPendulum.rotationSpeed = settings.pendulum.getRotationSpeed();
+        settings.saveAsCookie();
 
     });
 
@@ -247,3 +251,4 @@ function validateColor(colValue) {
         return false;
     }
 }
+

@@ -29,6 +29,21 @@ function setup() {
 }
 
 function initSettings() {
+  if (settingsCookieExists()) {
+    print("Loading settings from cookie");
+    var settings = new GlobalSettings();
+    settings = settings.loadFromCookie();
+
+    if (settings !== null) {
+      return settings;
+    }
+  }
+
+  print("No settings found in cookie. Loading default settings");
+  return initSettingsDefault();
+}
+
+function initSettingsDefault() {
   var xRadius = 400;
   var yRadius = 200;
   var centerX = width / 2;
@@ -80,7 +95,9 @@ function initSettings() {
     highlightStretch
   );
 
-  return new GlobalSettings(pendulumSettings, bgSettings);
+  var settings = new GlobalSettings(pendulumSettings, bgSettings);
+
+  return settings;
 }
 
 function draw() {
@@ -130,4 +147,12 @@ function resetPendulumBtnPressed() {
 
 function saveAsImageBtnPressed() {
   save("PendulumPainting.png");
+}
+
+function defaultSettingsBtnPressed() {
+  settings = initSettingsDefault();
+  paintBackground(settings.bg);
+  paintPendulum.init();
+  bindSettingsToHTML(settings);
+  settings.saveAsCookie();
 }
