@@ -33,7 +33,7 @@ function PaintPendulumSettings(
     this.swingingSpeed = swingingSpeed;
     this.startAngle = startAngle;
 
-    this.pointsPerFrame = 15;
+    this.pointsPerFrame = 30;
 
     this.getInitXRadius = function () {
         return this.xRadius;

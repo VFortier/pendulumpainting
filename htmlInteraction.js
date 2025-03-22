@@ -9,6 +9,9 @@ function bindHTMLEvents(settings) {
     let resetBtn = select("#resetBtn");
     resetBtn.mousePressed(resetBtnPressed);
 
+    let saveAsImageBtn = select("#saveAsImage");
+    saveAsImageBtn.mousePressed(saveAsImageBtnPressed);
+
     bindInputChanged(settings);
 }
 

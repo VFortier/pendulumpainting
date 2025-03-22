@@ -2,9 +2,21 @@ var paintPendulum;
 var settings;
 var isRunning = true;
 
+// Square
+// var CANVAS_WIDTH = 800;
+// var CANVAS_HEIGHT = 800;
+
+// 5in x 7in : 900 x 1260
+var CANVAS_WIDTH = 1260;
+var CANVAS_HEIGHT = 900;
+
+// 4in x 6in : 720 x 1080
+// var CANVAS_WIDTH = 1080;
+// var CANVAS_HEIGHT = 720;
+
 function setup() {
   frameRate(60);
-  let canvas = createCanvas(800, 800);
+  let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
   canvas.parent("canvasContainer");
 
   settings = initSettings();
@@ -109,4 +121,8 @@ function resetBtnPressed() {
   paintBackground(settings.bg);
   paintPendulum.init();
   isRunning = true;
+}
+
+function saveAsImageBtnPressed() {
+  save("PendulumPainting.png");
 }
