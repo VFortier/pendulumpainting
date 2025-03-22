@@ -9,6 +9,9 @@ function bindHTMLEvents(settings) {
     let resetBtn = select("#resetBtn");
     resetBtn.mousePressed(resetBtnPressed);
 
+    let resetPendulumBtn = select("#resetPendulumBtn");
+    resetPendulumBtn.mousePressed(resetPendulumBtnPressed);
+
     let saveAsImageBtn = select("#saveAsImage");
     saveAsImageBtn.mousePressed(saveAsImageBtnPressed);
 

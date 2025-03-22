@@ -101,7 +101,7 @@ function keyPressed() {
 
   // r
   if (keyCode == 82) {
-    resetBtnPressed();
+    resetPendulumBtnPressed();
   }
 
   if (keyCode == UP_ARROW) {
@@ -116,10 +116,15 @@ window.addEventListener('keydown', function (e) {
   }
 });
 
-
 function resetBtnPressed() {
   paintBackground(settings.bg);
   paintPendulum.init();
+  isRunning = true;
+}
+
+function resetPendulumBtnPressed() {
+  paintPendulum.init();
+  updatePixels();
   isRunning = true;
 }
 

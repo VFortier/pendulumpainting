@@ -9,11 +9,9 @@
 
 # UI
 - Trim spaces on inputs
-- Reset for bg separate
 - Tooltips
 - Start new pendulum button (to draw many pendulum on one frame)
 - Start/stop button
-- Save to img
 
 
 
