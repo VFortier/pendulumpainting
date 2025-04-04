@@ -12,6 +12,7 @@ function PaintPendulum(settings) {
         this.rotationSpeed = this.settings.getRotationSpeed();
         this.rotation = this.settings.getStartAngle();
         this.swinging = 0;
+        this.strokeWeight = this.settings.getStrokeWeight();
     }
 
     this.moveAndPaint = function () {
@@ -45,23 +46,26 @@ function PaintPendulum(settings) {
 
 
             // Keep ellipse proportions
-            this.xRadius = this.xRadius > 0 ? this.xRadius - this.settings.getRadiusReductSpeed() * this.xToY : 0;
-            this.yRadius = this.yRadius > 0 ? this.yRadius - this.settings.getRadiusReductSpeed() : 0;
+            //this.xRadius = this.xRadius > 0 ? this.xRadius - this.settings.getRadiusReductSpeed() * this.xToY : 0;
+            //this.yRadius = this.yRadius > 0 ? this.yRadius - this.settings.getRadiusReductSpeed() : 0;
 
             // Reduce equally 
-            // this.xRadius = this.xRadius > 0 ? this.xRadius - this.settings.getRadiusReductSpeed() : 0;
-            // this.yRadius = this.yRadius > 0 ? this.yRadius - this.settings.getRadiusReductSpeed() : 0;
+            //this.xRadius = this.xRadius > 0 ? this.xRadius - this.settings.getRadiusReductSpeed() : 0;
+            //this.yRadius = this.yRadius > 0 ? this.yRadius - this.settings.getRadiusReductSpeed() : 0;
 
             // In between
-            //let factor = this.xToY > 1 ? this.xToY / 1.3 : this.xToY * 1.;
-            //this.xRadius = this.xRadius > 0 ? this.xRadius - this.settings.getRadiusReductSpeed() * factor : 0;
-            //this.yRadius = this.yRadius > 0 ? this.yRadius - this.settings.getRadiusReductSpeed() : 0;
+            let factor = this.xToY > 1 ? this.xToY / 1.3 : this.xToY * 1.;
+            this.xRadius = this.xRadius > 0 ? this.xRadius - this.settings.getRadiusReductSpeed() * factor : 0;
+            this.yRadius = this.yRadius > 0 ? this.yRadius - this.settings.getRadiusReductSpeed() : 0;
         }
     }
 
     this._dropPaintWithPoints = function () {
+
+        this.stokeWeight -= this.settings.stokeWeightDecreaseSpeed;
+
         stroke(this.settings.getStrokeColor());
-        strokeWeight(this.settings.getStrokeWeight());
+        strokeWeight(this.stokeWeight);
         point(this.x, this.y);
 
         // WIP - gradient stroke - not working because new points draw over previous ones
@@ -85,10 +89,21 @@ function PaintPendulum(settings) {
     }
 
     this._dropPaintWithVertex = function () {
+        // WITH STROKE DECREASE
+        // Hardcoded for now - to be moved to settings
+        // this.settings.strokeWeightDecreaseSpeed = 0.000002;
+        //this.settings.strokeWeightDecreaseSpeed = 0;
+
+        // if (this.strokeWeight > 0.3) {
+        //     this.strokeWeight -= this.settings.strokeWeightDecreaseSpeed;
+        // }
+
+        //strokeWeight(this.strokeWeight);
+        // NO STROKE DECREASE
+        strokeWeight(this.settings.getStrokeWeight());
+
         let strokeColor = this.settings.getStrokeColor();
         stroke(strokeColor);
-
-        strokeWeight(this.settings.getStrokeWeight());
         noFill();
         line(this.x, this.y, this.prevX, this.prevY);
     }

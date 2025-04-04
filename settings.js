@@ -78,7 +78,7 @@ function PaintPendulumSettings(
     this.swingingSpeed = swingingSpeed;
     this.startAngle = startAngle;
 
-    this.pointsPerFrame = 30;
+    this.pointsPerFrame = 10;
 
     this.toJSON = toJSON;
     this.fromJSON = fromJSON;

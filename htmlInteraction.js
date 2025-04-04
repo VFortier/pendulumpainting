@@ -39,7 +39,7 @@ function bindInputChanged(settings) {
             return;
         }
         settings.pendulum.rotationReductFactor = this.value();
-
+        settings.saveAsCookie();
     });
 
     let xRadiusElem = select("#xRadius");
@@ -49,7 +49,7 @@ function bindInputChanged(settings) {
         }
         settings.pendulum.xRadius = this.value();
         paintPendulum.xRadius = settings.pendulum.getInitXRadius();
-
+        settings.saveAsCookie();
     });
 
     let yRadiusElem = select("#yRadius");
@@ -60,7 +60,7 @@ function bindInputChanged(settings) {
         }
         settings.pendulum.yRadius = this.value();
         paintPendulum.yRadius = settings.pendulum.getInitYRadius();
-
+        settings.saveAsCookie();
     });
 
     let radiusReductSpeedElem = select("#radiusReductSpeed");
@@ -70,6 +70,7 @@ function bindInputChanged(settings) {
         }
 
         settings.pendulum.radiusReductSpeed = this.value();
+        settings.saveAsCookie();
     });
 
     let centerXElem = select("#centerX");
@@ -79,6 +80,7 @@ function bindInputChanged(settings) {
         }
 
         settings.pendulum.centerX = this.value();
+        settings.saveAsCookie();
     });
 
     let centerYElem = select("#centerY");
@@ -88,6 +90,7 @@ function bindInputChanged(settings) {
         }
 
         settings.pendulum.centerY = this.value();
+        settings.saveAsCookie();
     });
 
     let globalSpeedElem = select("#globalSpeed");
@@ -97,6 +100,7 @@ function bindInputChanged(settings) {
         }
 
         settings.pendulum.globalSpeed = this.value();
+        settings.saveAsCookie();
     });
 
     let strokeColorElem = select("#strokeColor");
@@ -104,6 +108,7 @@ function bindInputChanged(settings) {
         if (validateColor(this.value())) {
             settings.pendulum.strokeColor = this.value();
         }
+        settings.saveAsCookie();
     });
 
     let strokeWeightElem = select("#strokeWeight");
@@ -113,6 +118,7 @@ function bindInputChanged(settings) {
         }
 
         settings.pendulum.strokeWeight = this.value();
+        settings.saveAsCookie();
     });
 
     let swingingLengthElem = select("#swingingLength");
@@ -122,6 +128,7 @@ function bindInputChanged(settings) {
         }
 
         settings.pendulum.swingingLength = this.value();
+        settings.saveAsCookie();
     });
 
     let swingingSpeedElem = select("#swingingSpeed");
@@ -131,6 +138,7 @@ function bindInputChanged(settings) {
         }
 
         settings.pendulum.swingingSpeed = this.value();
+        settings.saveAsCookie();
 
     });
 
@@ -141,12 +149,14 @@ function bindInputChanged(settings) {
         }
 
         settings.pendulum.startAngle = this.value();
+        settings.saveAsCookie();
     });
 
     let backgroundColorElem = select("#bgColor");
     backgroundColorElem.input(function () {
         if (validateColor(this.value())) {
             settings.bg.bgColor = this.value();
+            settings.saveAsCookie();
         }
     });
 
@@ -154,6 +164,7 @@ function bindInputChanged(settings) {
     backgroundHighlightsElem.input(function () {
         if (validateColor(this.value())) {
             settings.bg.highlightsColor = this.value();
+            settings.saveAsCookie();
         }
     });
 
@@ -164,6 +175,7 @@ function bindInputChanged(settings) {
         }
 
         settings.bg.highlightsThreshold = this.value();
+        settings.saveAsCookie();
     });
 
     let backgroundHighlightsDetailElem = select("#highlightsDetail");
@@ -173,6 +185,7 @@ function bindInputChanged(settings) {
         }
 
         settings.bg.highlightsDetail = this.value();
+        settings.saveAsCookie();
     });
 
     let highlightStretchElem = select("#highlightsStretch");
@@ -182,6 +195,7 @@ function bindInputChanged(settings) {
         }
 
         settings.bg.highlightsStretch = this.value();
+        settings.saveAsCookie();
     });
 
 }
