@@ -2,17 +2,17 @@ var paintPendulum;
 var settings;
 var isRunning = true;
 
-// Square canvas
+// Square
 // var CANVAS_WIDTH = 800;
-//var CANVAS_HEIGHT = 800;
+// var CANVAS_HEIGHT = 800;
 
-// 4 x 6 inch canvas
-var CANVAS_WIDTH = 1080;
-var CANVAS_HEIGHT = 720;
+// 5in x 7in : 900 x 1260
+var CANVAS_WIDTH = 1260;
+var CANVAS_HEIGHT = 900;
 
-// 5 x 7 inch canvas
-// var CANVAS_WIDTH = 1280;
-// var CANVAS_HEIGHT = 1080;
+// 4in x 6in : 720 x 1080
+// var CANVAS_WIDTH = 1080;
+// var CANVAS_HEIGHT = 720;
 
 function setup() {
   frameRate(60);
@@ -29,6 +29,21 @@ function setup() {
 }
 
 function initSettings() {
+  if (settingsCookieExists()) {
+    print("Loading settings from cookie");
+    var settings = new GlobalSettings();
+    settings = settings.loadFromCookie();
+
+    if (settings !== null) {
+      return settings;
+    }
+  }
+
+  print("No settings found in cookie. Loading default settings");
+  return initSettingsDefault();
+}
+
+function initSettingsDefault() {
   var xRadius = 400;
   var yRadius = 200;
   var centerX = width / 2;
@@ -80,7 +95,9 @@ function initSettings() {
     highlightStretch
   );
 
-  return new GlobalSettings(pendulumSettings, bgSettings);
+  var settings = new GlobalSettings(pendulumSettings, bgSettings);
+
+  return settings;
 }
 
 function draw() {
@@ -101,7 +118,7 @@ function keyPressed() {
 
   // r
   if (keyCode == 82) {
-    resetBtnPressed();
+    resetPendulumBtnPressed();
   }
 
   if (keyCode == UP_ARROW) {
@@ -116,9 +133,26 @@ window.addEventListener('keydown', function (e) {
   }
 });
 
-
 function resetBtnPressed() {
   paintBackground(settings.bg);
   paintPendulum.init();
   isRunning = true;
+}
+
+function resetPendulumBtnPressed() {
+  paintPendulum.init();
+  updatePixels();
+  isRunning = true;
+}
+
+function saveAsImageBtnPressed() {
+  save("PendulumPainting.png");
+}
+
+function defaultSettingsBtnPressed() {
+  settings = initSettingsDefault();
+  paintBackground(settings.bg);
+  paintPendulum.init();
+  bindSettingsToHTML(settings);
+  settings.saveAsCookie();
 }
