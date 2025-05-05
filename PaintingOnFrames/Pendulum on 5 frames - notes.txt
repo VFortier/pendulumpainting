@@ -1,0 +1,28 @@
+Center in image; assuming 0;0 is upper left corner
+x = 2650
+y = 1700
+
+
+Positions in image (photopea)
+Upper left
+1800;800 (in image)
+-900;-900 (relative to real center)
+
+
+Upper right
+3550;800 (in image)
+900;-900 (relative to real center)
+
+
+Lower left
+850;2900 (in image)
+-1800;1200 (relative to real center)
+
+Lower mid
+2650;2750 (in image)
+0;1050 (relative to real center)
+
+
+Lower right
+4400;2900 (in image)
+1800;1200 (relative to real center)
