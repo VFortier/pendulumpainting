@@ -101,6 +101,10 @@ function initSettingsDefault() {
 }
 
 function draw() {
+  drawForRealTime();
+}
+
+function drawForRealTime() {
   if (isRunning) {
     paintPendulum.moveAndPaint();
   } else {

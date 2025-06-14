@@ -20,7 +20,6 @@ function GlobalSettings(pendulumSettings, bgSettings) {
             }
         }
 
-        // use fromJSON to create a new object
         if (settingsString !== "") {
             return this.fromJSON(JSON.parse(settingsString));
         }
