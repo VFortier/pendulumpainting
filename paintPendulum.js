@@ -13,6 +13,7 @@ function PaintPendulum(settings) {
         this.rotation = this.settings.getStartAngle();
         this.swinging = 0;
         this.strokeWeight = this.settings.getStrokeWeight();
+        this.paintCounter = 0;
     }
 
     this.moveAndPaint = function () {
@@ -58,6 +59,7 @@ function PaintPendulum(settings) {
             this.xRadius = this.xRadius > 0 ? this.xRadius - this.settings.getRadiusReductSpeed() * factor : 0;
             this.yRadius = this.yRadius > 0 ? this.yRadius - this.settings.getRadiusReductSpeed() : 0;
         }
+        this.paintCounter++;
     }
 
     this._dropPaintWithPoints = function () {
@@ -68,7 +70,7 @@ function PaintPendulum(settings) {
         strokeWeight(this.stokeWeight);
         point(this.x, this.y);
 
-        // WIP - gradient stroke - not working because new points draw over previous ones
+        // WIP - gradient stroke - not working because new points are drawn over previous ones
         // var strokeStep = 0.5;
         // var colorStep = 50 / this.settings.getStrokeWeight();
         // var counter = 1;

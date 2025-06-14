@@ -44,6 +44,7 @@ function initSettings() {
 }
 
 function initSettingsDefault() {
+  var isRealTime = false;
   var xRadius = 400;
   var yRadius = 200;
   var centerX = width / 2;
@@ -64,8 +65,12 @@ function initSettingsDefault() {
   var swingingLength = 100;
   var swingingSpeed = 0;
   var startAngle = 0;
+  var minRadius = 10;
+  var minRotationSpeed = 0.0000001;
+  var maxPointCount = 100000;
 
   pendulumSettings = new PaintPendulumSettings(
+    isRealTime,
     xRadius,
     yRadius,
     centerX,
@@ -78,7 +83,10 @@ function initSettingsDefault() {
     radiusReductSpeed,
     swingingLength,
     swingingSpeed,
-    startAngle
+    startAngle,
+    minRadius,
+    minRotationSpeed,
+    maxPointCount
   );
 
   var backgroundColor = "030333";
@@ -101,7 +109,12 @@ function initSettingsDefault() {
 }
 
 function draw() {
-  drawForRealTime();
+  if (settings.pendulum.isRealTime) {
+    drawForRealTime();
+  } else {
+    drawForInstantGeneration();
+    noLoop();
+  }
 }
 
 function drawForRealTime() {
@@ -112,6 +125,39 @@ function drawForRealTime() {
       paintPendulum.moveAndPaintOnce();
     }
   }
+}
+
+function drawForInstantGeneration() {
+  var stillRunning = true;
+
+  while (stillRunning) {
+    paintPendulum.moveAndPaintOnce();
+    stillRunning = checkIfStillRunning();
+  }
+}
+
+function checkIfStillRunning() {
+  if (paintPendulum.xRadius <= settings.pendulum.minRadius) {
+    print("Stopping pendulum painting: xRadius below minRadius");
+    return false;
+  }
+
+  if (paintPendulum.yRadius <= settings.pendulum.minRadius) {
+    print("Stopping pendulum painting: yRadius below minRadius");
+    return false;
+  }
+
+  if (paintPendulum.rotationSpeed <= settings.pendulum.minRotationSpeed) {
+    print("Stopping pendulum painting: rotationSpeed below minRotationSpeed");
+    return false;
+  }
+
+  if (paintPendulum.paintCounter >= settings.pendulum.maxPointCount) {
+    print("Stopping pendulum painting: paintCounter exceeded maxPointCount");
+    return false;
+  }
+
+  return true;
 }
 
 function keyPressed() {
@@ -141,12 +187,14 @@ function resetBtnPressed() {
   paintBackground(settings.bg);
   paintPendulum.init();
   isRunning = true;
+  loop();
 }
 
 function resetPendulumBtnPressed() {
   paintPendulum.init();
   updatePixels();
   isRunning = true;
+  loop();
 }
 
 function saveAsImageBtnPressed() {

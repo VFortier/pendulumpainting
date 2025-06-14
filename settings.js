@@ -49,6 +49,7 @@ function GlobalSettings(pendulumSettings, bgSettings) {
 
 
 function PaintPendulumSettings(
+    isRealTime,
     xRadius,
     yRadius,
     centerX,
@@ -61,8 +62,12 @@ function PaintPendulumSettings(
     radiusReductSpeed,
     swingingLength,
     swingingSpeed,
-    startAngle) {
+    startAngle,
+    minRadius,
+    minRotationSpeed,
+    maxPointCount) {
 
+    this.isRealTime = isRealTime;
     this.xRadius = xRadius;
     this.yRadius = yRadius;
     this.centerX = centerX;
@@ -76,11 +81,18 @@ function PaintPendulumSettings(
     this.swingingLength = swingingLength;
     this.swingingSpeed = swingingSpeed;
     this.startAngle = startAngle;
+    this.minRadius = minRadius;
+    this.minRotationSpeed = minRotationSpeed;
+    this.maxPointCount = maxPointCount;
 
     this.pointsPerFrame = 10;
 
     this.toJSON = toJSON;
     this.fromJSON = fromJSON;
+
+    this.getIsRealTime = function () {
+        return this.isRealTime;
+    }
 
     this.getInitXRadius = function () {
         return this.xRadius;
@@ -140,6 +152,18 @@ function PaintPendulumSettings(
 
     this.getPointsPerFrame = function () {
         return this.pointsPerFrame;
+    }
+
+    this.getMinRadius = function () {
+        return this.minRadius;
+    }
+
+    this.getMinRotationSpeed = function () {
+        return this.minRotationSpeed;
+    }
+
+    this.getMaxPointCount = function () {
+        return this.maxPointCount;
     }
 }
 
