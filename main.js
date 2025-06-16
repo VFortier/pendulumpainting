@@ -44,7 +44,7 @@ function initSettings() {
 }
 
 function initSettingsDefault() {
-  var isRealTime = false;
+  var isRealTime = true;
   var xRadius = 400;
   var yRadius = 200;
   var centerX = width / 2;
